@@ -1,0 +1,27 @@
+{%  extends "MainApp/wrapper.html" %}
+{% block content %}
+
+    <h3 align="center">User list</h3>
+    {% for user in list_user %}
+        <div class="container">
+            <div>
+                <a href="user/{{ user }}"> {{ user }}</a>
+            </div>
+            <form action="u/{{ user.id }}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="delete" align="center">
+            </form>
+        </div>
+        <br>
+    {% endfor %}
+    <br>
+
+ <h3 align="center">Add new user</h3>
+    <div class="container">
+        <form action="user/add" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add"/>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{%  extends "MainApp/wrapper.html" %}
+
+{% block content %}
+    <h3 align="center">Playlists</h3>
+
+    {% for album in list_album %}
+        <div class="container">
+            <div>
+              <a href="/music/album/{{ album }}">{{ album }}</a>
+            </div>
+            <div>
+                {{album.genre}}
+            </div>
+            <form action="a/{{ album.id }}" method="delete">
+                {% csrf_token %}
+                <input type="submit" value="delete" align="center">
+            </form>
+        </div>
+        <br>
+    {% endfor %}
+    <br>
+
+    <h3 align="center">Add new playlist</h3>
+    <div class="container">
+        <form action="album/add" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add"/>
+        </form>
+    </div>
+
+{% endblock %}

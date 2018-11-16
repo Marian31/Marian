@@ -1,0 +1,32 @@
+{%  extends "MainApp/wrapper.html" %}
+
+{% block content %}
+    <h3 align="center">Songs in Playlist</h3>
+
+    {% for song in list_song %}
+        <div class="container">
+            <div>
+                {{ song }}
+            </div>
+            <div>
+                {{ song.artist }}
+            </div>
+            <form action="s/{{ song.id }}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="delete" align="center">
+            </form>
+        </div>
+        <br>
+    {% endfor %}
+    <br>
+
+    <h3 align="center">Add new song</h3>
+    <div class="container">
+       <form action="/music/album/song/add" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add"/>
+        </form>
+    </div>
+
+{% endblock %}
